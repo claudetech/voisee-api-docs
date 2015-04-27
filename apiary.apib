@@ -12,7 +12,9 @@ Note: '\n' is used as the new line delimiter
 
 Given a POST request to
 
+```
 http://api.voisee.jp/a path?q=some query
+```
 
 with the following payload
 
@@ -50,9 +52,29 @@ Create an empty string and then
 
 ### Add the needed headers
 
-* Add the `SSA-Auth-Time` header containing the current time in the iso8601 format
+* Add the `SAA-Auth-Time` header containing the current time in the iso8601 format
 * Add the `Authorization` header with `Signature: SIGNATURE` where SIGNATURE is the generated signature.
 
+## Roles
+
+There are three different roles:
+
+* Store group
+    * Owns an application
+    * Can manage own application
+    * Can manage all stores in a store group
+
+* Store
+    * Belongs to a store group
+    * Do not own application
+    * Can manage store page in store group application
+    * Can upgrade/downgrade store plan
+
+* User
+    * Does not belong to a store group
+    * Owns an application
+    * Can manage own application
+    * Can upgrade/downgrade plan
 
 ## Media Types
 
@@ -63,220 +85,180 @@ while a get action will always return a JSON object.
 
 ## Pagination
 
-This API uses the following headers for pagination when applicable.
+All endpoints returning list accept the following parameters:
 
-* `X-Total-Count`: the total number of entries for the given resource
-* `Link`: headers for links as described by [RFC 5988](http://tools.ietf.org/html/rfc5988)
+* min_id (optional, integer) ... The minimum ID to return. Default: `null`
+* max_id (optional, integer) ... The maximum ID to return. Default: `null`
+* count (optional, integer) ... The number of items to return. Default: `20`
+
+All paginated responses contain the `X-Total-Count` header.
 
 ## Error States
 
 The common [HTTP Response Status Codes](https://github.com/for-GET/know-your-http-well/blob/master/status-codes.md) are used.
 
-# Group Voices
-Handle voices.
+## Payment
 
-## Voice [/voices/{id}]
-Interactions with a single voice
+All payments will use [WebPay](https://webpay.jp/).
 
-+ Parameters
+# Group Store Group
 
-    + id (required, integer, `4`) ... The voice ID
+A group of store representing either a mall, or a commercial district.
 
-+ Model
 
-    + Headers
+## Store group [/store_groups/{id}]
 
-            Content-Type: application/json
+Requires Store group role.
 
+
+### Get store group [GET]
+
+Get information about the store group.
+
++ Response 200
     + Body
 
         ```json
         {
             "id": 1,
-            "company": {
-                "id": 7,
-                "name": "Toranoko"
-            },
-            "title": "Free wifi",
-            "body": "Add free access wifi",
-            "created_at": "2014-11-05T18:37:52+09:00",
-            "created_at": "2014-11-05T18:42:52+09:00"
+            "name": "某商店街"
         }
         ```
 
-### Get Voice [GET]
-Get a single voice.
+## Stores [/store_groups/{id}/stores]
+
+### List stores [GET]
+
+List all approved stores in the store group.
+Requires Store group role.
 
 + Response 200
-
-    [Voice][]
-
-### Update a Voice [PUT]
-Update a single voice
-
-+ Request
-
-    [Voice][]
-
-+ Response 200
-
-    [Voice][]
-
-### Delete a Voice [DELETE]
-Delete a single note
-
-+ Response 204
-
-## Voice Collection [/voices{?company_id,sort,limit}]
-API interacting with a collection of voices.
-
-
-+ Model
-
-    + Headers
-
-            Content-Type: application/json
-
     + Body
 
         ```json
         [
             {
                 "id": 1,
-                "company": {
-                    "id": 7,
-                    "name": "Toranoko"
-                },
-                "title": "Free wifi",
-                "body": "Add free access wifi"
-            },
-            {
-                "id": 2,
-                "company": {
-                    "id": 2,
-                    "name": "Rakuten"
-                },
-                "title": "Improve the design",
-                "body": "This site is really hard to use"
+                "name": "Toranoko",
+                "approved": true,
+                "created_at": "2015-04-27T18:37:52+09:00",
+                "updated_at": "2015-04-27T18:42:52+09:00"
             }
         ]
         ```
 
-### Get Voices [GET]
-Get a list of voices.
+### Create store [POST]
 
-+ Parameters
+Requires Store role.
 
-    + company_id (optional, integer, `8`) ... Search voices for the company
-    + sort = `updated_at` (optional, string, `created_at`) ... Which field to sort by
-    + limit = `20` (optional, integer, `35`) ... The maximum number of voices to return, up to `50`
-
-+ Response 200
-
-    [Voice Collection][]
-
-### Create New Voice [POST]
-Create a new note
+Creates a store in the Store Group.
+The store is not made public until the `stores/{id}/approve` API is called.
 
 + Request
 
-    [Voice][]
+    + Body
+
+        ```json
+        {
+            "name": "Toranoko"
+        }
+        ```
 
 + Response 201
 
-    [Voice][]
-
-# Group Users
-Group description
-
-## User List [/users{?name,joinedBefore,joinedAfter,sort,limit}]
-A list of users
-
-+ Parameters
-
-    + name (optional, string, `alice`) ... Search for a user by name
-    + joinedBefore (optional, string, `2011-01-01`) ... Search by join date
-    + joinedAfter (optional, string, `2011-01-01`) ... Search by join date
-    + sort = `name` (optional, string, `joined`) ... Which field to sort by
-
-        + Values
-            + `name`
-            + `joined`
-            + `-joined`
-            + `age`
-            + `-age`
-            + `location`
-            + `-location`
-            + `plan`
-            + `-plan`
-
-    + limit = `10` (optional, integer, `25`) ... The maximum number of users to return, up to `50`
-
-+ Model
-
-    + Headers
-
-            Content-Type: application/json
+    [Store]
 
     + Body
 
-            [
-                {
-                    "name": "alice",
-                    "image": "http://foo.com/alice.jpg",
-                    "joined": "2013-11-01"
-                },
-                {
-                    "name": "bob",
-                    "image": "http://foo.com/bob.jpg",
-                    "joined": "2013-11-02"
-                }
-            ]
+        ```json
+        {
+            "id": 1,
+            "name": "Toranoko",
+            "approved": false,
+            "created_at": "2015-04-27T18:37:52+09:00",
+            "updated_at": "2015-04-27T18:42:52+09:00"
+        }
+        ```
 
-    + Schema
+## Approve store [/stores/{id}/approve]
 
-            {
-                "type": "array",
-                "maxItems": 50,
-                "items": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        },
-                        "image": {
-                            "type": "string"
-                        },
-                        "joined": {
-                            "type": "string",
-                            "pattern": "\d{4}-\d{2}-\d{2}"
-                        }
-                    }
-                }
+Requires Store group role.
+
+### Approve store [POST]
+
++ Response 204
+
+## Store [/stores/{id}]
+
+### Get a store [GET]
+
+Requires Store group role or store role with `id` matching current store.
+
++ Response 200
+
+    + Body
+
+        ```json
+        {
+            "id": 1,
+            "name": "Toranoko",
+            "approved": true,
+            "available_credit_card": false,
+            "plan": {
+                "id": 1,
+                "type": "standard"
             }
+            "created_at": "2015-04-27T18:37:52+09:00",
+            "updated_at": "2015-04-27T18:42:52+09:00"
+        }
+        ```
 
-### Get users [GET]
-Get a list of users. Example:
+### Update a store [PUT]
 
-```no-highlight
-https://api.mywebsite.com/users?sort=joined&limit=5
-```
+Requires store role.
 
-+ Response 200
++ Request
 
-    [User List][]
+    + Body
 
-# Group Tags and Tagging Long Title
-Get or set tags on notes
-
-## GET /tags
-Get a list of bars
-
-+ Response 200
-
-## Get one tag [/tags/{id}]
-Get a single tag
-
-### GET
+        ```json
+        {
+            "name": "toranoko"
+        }
+        ```
 
 + Response 200
+
+    + Body
+
+        ```json
+        {
+            "id": 1,
+            "name": "toranoko",
+            "plan": {
+                "id": 1,
+                "type": "standard"
+            },
+            "created_at": "2015-04-27T18:37:52+09:00",
+            "updated_at": "2015-04-27T18:42:52+09:00"
+        }
+        ```
+
+## Store plan [/stores/{id}/plan]
+
+### Update plan [PUT]
+
+Updates the current pricing plan. Requires store role.
+To upgrade to premium plan, credit card information is needed.
+
++ Request
+
+    + Body
+
+        ```json
+        {
+            "type": "premium"
+        }
+        ```
+
++ Response 204
