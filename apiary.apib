@@ -1,11 +1,58 @@
 FORMAT: 1A
-HOST: https://api.voisee.com
+HOST: https://api.voisee.jp
 
-# Voisee API 
+# Voisee API
 
 ## Authentication
 
-TBD
+All request, except login and registration need authentication.
+Request need to be signed to perform authentication.
+
+Note: '\n' is used as the new line delimiter
+
+Given a POST request to
+
+http://api.voisee.jp/a path?q=some query
+
+with the following payload
+
+```json
+{"seen": true}
+```
+
+and the secret key: MY_SECRET_KEY, the request should be signed in the following way:
+
+### Create a canonical request
+
+Create an empty string and then
+
+1. Append the downcased HTTP method (e.g. post), and append a new line delimiter
+2. Append the URI encoded URL, without the query parameters (e.g. https://api.voisee.jp/a%20path) and append a new line delimiter
+3. Append the URI encoded query string (e.g. q=some%20query) and append a new line delimiter
+4. Hash the payload using SHA1 algorithm, encode the result as an hexadecimal string, and append the final result
+
+### Create a string to sign
+
+1. Create string with the current time in the iso8601 format, and append a new line
+2. Hash the canonical request using the SHA1 algorithm, encode the result as an hexadecimal string and append it to the string
+
+### Create a signing key
+
+1. Concatenate 'saa' and the secret key
+  -> saaMY_SECRET_KEY
+2. Format the current time with the format: %Y%m%d
+3. Use the key generated in 1. to sign 2. using HMAC with the SHA1 algorithm
+
+### Generate the signature
+
+1. Sign the string to sign with the signing key using HMAC with the SHA1 algorithm.
+2. Encode the result to an hexadecimal string
+
+### Add the needed headers
+
+* Add the `SSA-Auth-Time` header containing the current time in the iso8601 format
+* Add the `Authorization` header with `Signature: SIGNATURE` where SIGNATURE is the generated signature.
+
 
 ## Media Types
 
@@ -132,7 +179,7 @@ Get a list of voices.
 Create a new note
 
 + Request
-    
+
     [Voice][]
 
 + Response 201
