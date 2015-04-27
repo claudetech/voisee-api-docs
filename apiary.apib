@@ -8,6 +8,10 @@ HOST: https://api.voisee.jp
 All request, except login and registration need authentication.
 Request need to be signed to perform authentication.
 
+The server side implementation is available at
+
+https://github.com/claudetech/ruby-simple-api-auth
+
 Note: '\n' is used as the new line delimiter
 
 Given a POST request to
@@ -148,8 +152,6 @@ Requires Store group role.
         ```
 
 ### Create store [POST]
-
-Requires Store role.
 
 Creates a store in the Store Group.
 The store is not made public until the `stores/{id}/approve` API is called.
