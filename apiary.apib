@@ -211,7 +211,7 @@ Requires Store group role or store role with `id` matching current store.
             "plan": {
                 "id": 1,
                 "type": "standard"
-            }
+            },
             "created_at": "2015-04-27T18:37:52+09:00",
             "updated_at": "2015-04-27T18:42:52+09:00"
         }
@@ -266,3 +266,46 @@ To upgrade to premium plan, credit card information is needed.
         ```
 
 + Response 204
+
+# Group Store application
+
+## Application [/stores/{id}/application]
+
++ Model
+
+    + Body
+
+        ```json
+        {
+            "status": "published",
+            "version": "0.4.1",
+            "configuration": "{\"theme\": \"brown\", \"plugins\": [\"news\", \"coupons\"]}"
+        }
+        ```
+
+### Get application [GET]
+
+Requires store permission. Get the store application
+
++ Response 200
+
+    [Application][]
+
+
+### Update application [PUT]
+
+Requires store permission. Creates or updates the store application.
+
++ Request
+
+    + Body
+
+        ```json
+        {
+            "configuration": "{\"theme\": \"brown\"}"
+        }
+        ```
+
++ Response 200
+
+    [Application][]
