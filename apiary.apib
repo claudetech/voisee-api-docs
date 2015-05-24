@@ -29,7 +29,7 @@ for more information.
 There are three different roles:
 
 * Store group
-    * Owns an application
+    * Can own one/multiple applications
     * Can manage own application
     * Can manage all stores in a store group
 
@@ -63,6 +63,10 @@ The common [HTTP Response Status Codes](https://github.com/for-GET/know-your-htt
 ## Payment
 
 All payments will use [WebPay](https://webpay.jp/).
+
+## Plugins
+
+All requests under the `/p` namespace will be forwarded to the plugin API if they have sufficient permission.
 
 # Group Store Group
 
@@ -268,3 +272,192 @@ Requires store permission. Creates or updates the store application.
 + Response 200
 
     [Application][]
+
+# Group News
+
+## News collection [/p/news]
+
+### List news [GET]
+
+List all news.
+
++ Response 200 (application/json)
+
+    + Body
+
+        ```json
+        [{
+            "id": "5541e298f27ae7da50d17816",
+            "title": "2月24日に、本マグロの解体ショーを行います！",
+            "body": "本マグロの解体ショーの魅力は、何といってもそのスケールの大きさ。 解体する本マグロの重量は、ほとんどが200kgを超えるもの。\n時には、300kgを超える巨大本マグロを解体することもあります。 \n海の中で時速約90kmのスピードで止まることなく泳ぎ続ける本マグロは、15～18年でこの大きさに成長。本マグロは、このクラスが最も美味しいとされています。\n是非お越しください！",
+            "images": [{
+                "id": "5541e298f27ae7da50d17816",
+                "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
+                "originalWidth": 800,
+                "originalHeight": 600,
+                "createdAt": "2015-02-18T16:54:25.473Z",
+                "updatedAt": "2015-02-18T16:54:25.473Z",
+                "deletedAt": null
+            }],
+            "commentsCount": 3,
+            "likesCount": 4,
+            "viewsCount": 18,
+            "createdAt": "2015-02-18T16:54:25.473Z",
+            "updatedAt": "2015-02-18T16:54:25.473Z",
+            "publishedAt": "2015-02-18T16:54:25.473Z",
+            "deletedAt": null
+        }]
+        ```
+
+### Post news [POST]
+
++ Request
+
+    + Body
+
+        ```json
+            {
+                "title": "2月24日に、本マグロの解体ショーを行います！",
+                "body": "本マグロの解体ショーの魅力は、何といってもそのスケールの大きさ。 解体する本マグロの重量は、ほとんどが200kgを超えるもの。\n時には、300kgを超える巨大本マグロを解体することもあります。 \n海の中で時速約90kmのスピードで止まることなく泳ぎ続ける本マグロは、15～18年でこの大きさに成長。本マグロは、このクラスが最も美味しいとされています。\n是非お越しください！",
+                "publishedAt": "2015-02-18T16:54:25.473Z",
+                "images": [
+                    "5541e298f27ae7da50d17816",
+                    "5541e298f27ae7da50d18817"
+                ]
+            }
+        ```
+
++ Response 201 (application/json)
+
+    + Body
+
+        ```json
+        {
+            "id": "5541e298f27ae7da50d17816",
+            "title": "2月24日に、本マグロの解体ショーを行います！",
+            "body": "本マグロの解体ショーの魅力は、何といってもそのスケールの大きさ。 解体する本マグロの重量は、ほとんどが200kgを超えるもの。\n時には、300kgを超える巨大本マグロを解体することもあります。 \n海の中で時速約90kmのスピードで止まることなく泳ぎ続ける本マグロは、15～18年でこの大きさに成長。本マグロは、このクラスが最も美味しいとされています。\n是非お越しください！",
+            "images": [{
+                "id": "5541e298f27ae7da50d17816",
+                "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
+                "originalWidth": 800,
+                "originalHeight": 600,
+                "createdAt": "2015-02-18T16:54:25.473Z",
+                "updatedAt": "2015-02-18T16:54:25.473Z",
+                "deletedAt": null
+            }],
+            "commentsCount": 0,
+            "likesCount": 0,
+            "viewsCount": 0,
+            "createdAt": "2015-02-18T16:54:25.473Z",
+            "updatedAt": "2015-02-18T16:54:25.473Z",
+            "publishedAt": "2015-02-18T16:54:25.473Z",
+            "deletedAt": null
+        }
+        ```
+
+## News resource [/v1/news/{id}]
+
+### Retrieve news [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+        ```json
+        {
+            "id": "5541e298f27ae7da50d17816",
+            "title": "2月24日に、本マグロの解体ショーを行います！",
+            "body": "本マグロの解体ショーの魅力は、何といってもそのスケールの大きさ。 解体する本マグロの重量は、ほとんどが200kgを超えるもの。\n時には、300kgを超える巨大本マグロを解体することもあります。 \n海の中で時速約90kmのスピードで止まることなく泳ぎ続ける本マグロは、15～18年でこの大きさに成長。本マグロは、このクラスが最も美味しいとされています。\n是非お越しください！",
+            "images": [{
+                "id": "5541e298f27ae7da50d17816",
+                "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
+                "originalWidth": 800,
+                "originalHeight": 600,
+                "createdAt": "2015-02-18T16:54:25.473Z",
+                "updatedAt": "2015-02-18T16:54:25.473Z",
+                "deletedAt": null
+            }],
+            "commentsCount": 3,
+            "likesCount": 4,
+            "viewsCount": 18,
+            "createdAt": "2015-02-18T16:54:25.473Z",
+            "updatedAt": "2015-02-18T16:54:25.473Z",
+            "publishedAt": "2015-02-18T16:54:25.473Z",
+            "deletedAt": null
+        }
+        ```
+
+### Update news [PUT]
+
++ Request
+
+    + Body
+
+        ```json
+            {
+                "title": "2月24日に、本マグロの解体ショーを行います！",
+                "body": "本マグロの解体ショーの魅力は、何といってもそのスケールの大きさ。 解体する本マグロの重量は、ほとんどが200kgを超えるもの。\n時には、300kgを超える巨大本マグロを解体することもあります。 \n海の中で時速約90kmのスピードで止まることなく泳ぎ続ける本マグロは、15～18年でこの大きさに成長。本マグロは、このクラスが最も美味しいとされています。\n是非お越しください！",
+                "images": [
+                    "5541e298f27ae7da50d17816",
+                    "5541e298f27ae7da50d18817"
+                ]
+            }
+        ```
+
++ Response 200 (application/json)
+
+    + Body
+
+        ```json
+        {
+            "id": "5541e298f27ae7da50d17816",
+            "title": "2月24日に、本マグロの解体ショーを行います！",
+            "body": "本マグロの解体ショーの魅力は、何といってもそのスケールの大きさ。 解体する本マグロの重量は、ほとんどが200kgを超えるもの。\n時には、300kgを超える巨大本マグロを解体することもあります。 \n海の中で時速約90kmのスピードで止まることなく泳ぎ続ける本マグロは、15～18年でこの大きさに成長。本マグロは、このクラスが最も美味しいとされています。\n是非お越しください！",
+            "images": [{
+                "id": "5541e298f27ae7da50d17816",
+                "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
+                "originalWidth": 800,
+                "originalHeight": 600,
+                "createdAt": "2015-02-18T16:54:25.473Z",
+                "updatedAt": "2015-02-18T16:54:25.473Z",
+                "deletedAt": null
+            }],
+            "commentsCount": 0,
+            "likesCount": 0,
+            "viewsCount": 0,
+            "createdAt": "2015-02-18T16:54:25.473Z",
+            "updatedAt": "2015-02-18T16:54:25.473Z",
+            "publishedAt": "2015-02-18T16:54:25.473Z",
+            "deletedAt": null
+        }
+        ```
+
+### Update news [DELETE]
+
++ Response 200 (application/json)
+
+    + Body
+
+        ```json
+        {
+            "id": "5541e298f27ae7da50d17816",
+            "title": "2月24日に、本マグロの解体ショーを行います！",
+            "body": "本マグロの解体ショーの魅力は、何といってもそのスケールの大きさ。 解体する本マグロの重量は、ほとんどが200kgを超えるもの。\n時には、300kgを超える巨大本マグロを解体することもあります。 \n海の中で時速約90kmのスピードで止まることなく泳ぎ続ける本マグロは、15～18年でこの大きさに成長。本マグロは、このクラスが最も美味しいとされています。\n是非お越しください！",
+            "images": [{
+                "id": "5541e298f27ae7da50d17816",
+                "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
+                "originalWidth": 800,
+                "originalHeight": 600,
+                "createdAt": "2015-02-18T16:54:25.473Z",
+                "updatedAt": "2015-02-18T16:54:25.473Z",
+                "deletedAt": null
+            }],
+            "commentsCount": 0,
+            "likesCount": 0,
+            "viewsCount": 0,
+            "createdAt": "2015-02-18T16:54:25.473Z",
+            "updatedAt": "2015-02-18T16:54:25.473Z",
+            "publishedAt": "2015-02-18T16:54:25.473Z",
+            "deletedAt": "2015-02-18T16:54:25.473Z"
+        }
+        ```
