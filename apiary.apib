@@ -278,113 +278,130 @@ Requires store permission. Creates or updates the store application.
 
 Available plugins are:
 
-* `news`
+## News
 
-    Sample news:
+Sample news:
 
-        {
+    {
+        "id": "5541e298f27ae7da50d17816",
+        "title": "2月24日に、本マグロの解体ショーを行います！",
+        "body": "本マグロの解体ショーの魅力は、何といってもそのスケールの大きさ。 解体する本マグロの重量は、ほとんどが200kgを超えるもの。\n時には、300kgを超える巨大本マグロを解体することもあります。 \n海の中で時速約90kmのスピードで止まることなく泳ぎ続ける本マグロは、15～18年でこの大きさに成長。本マグロは、このクラスが最も美味しいとされています。\n是非お越しください！",
+        "publishAt": "2015-02-18T16:54:25.473Z",
+        "images": [{
             "id": "5541e298f27ae7da50d17816",
-            "title": "2月24日に、本マグロの解体ショーを行います！",
-            "body": "本マグロの解体ショーの魅力は、何といってもそのスケールの大きさ。 解体する本マグロの重量は、ほとんどが200kgを超えるもの。\n時には、300kgを超える巨大本マグロを解体することもあります。 \n海の中で時速約90kmのスピードで止まることなく泳ぎ続ける本マグロは、15～18年でこの大きさに成長。本マグロは、このクラスが最も美味しいとされています。\n是非お越しください！",
-            "publishAt": "2015-02-18T16:54:25.473Z",
-            "images": [{
-                "id": "5541e298f27ae7da50d17816",
+            "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
+            "originalWidth": 800,
+            "originalHeight": 600,
+            "createdAt": "2015-02-18T16:54:25.473Z",
+            "updatedAt": "2015-02-18T16:54:25.473Z",
+            "deletedAt": null
+        }],
+        "applicationId": 14,
+        "commentsCount": 3,
+        "likesCount": 4,
+        "viewsCount": 18,
+        "createdAt": "2015-02-18T16:54:25.473Z",
+        "updatedAt": "2015-02-18T16:54:25.473Z",
+        "deletedAt": null
+    }
+
+## Voices
+
+Sample voice:
+
+    {
+        "id": "5541e298f27ae7da50d17816",
+        "body": "2月24日に、本マグロの解体ショーを行います！",
+        "images": [{
+            "id": "5541e298f27ae7da50d17816",
+            "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
+            "originalWidth": 800,
+            "originalHeight": 600,
+            "createdAt": "2015-02-18T16:54:25.473Z",
+            "updatedAt": "2015-02-18T16:54:25.473Z",
+            "deletedAt": null
+        }],
+        "author": {
+            "id": 8,
+            "displayName": "だにー",
+            "profileImage": {
+                "id": "5541e298f27ae7da50d17716",
                 "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
                 "originalWidth": 800,
                 "originalHeight": 600,
                 "createdAt": "2015-02-18T16:54:25.473Z",
                 "updatedAt": "2015-02-18T16:54:25.473Z",
                 "deletedAt": null
-            }],
-            "applicationId": 14,
-            "commentsCount": 3,
-            "likesCount": 4,
-            "viewsCount": 18,
+            }
+            },
+        "applicationId": 14,
+        "commentsCount": 3,
+        "likesCount": 4,
+        "viewsCount": 18,
+        "createdAt": "2015-02-18T16:54:25.473Z",
+        "updatedAt": "2015-02-18T16:54:25.473Z",
+        "deletedAt": null
+    }
+
+## Coupons
+
+Sample coupon:
+
+    {
+        "id": "5541e298f27ae7da50d17816",
+        "title": "★フードもドリンクも♪全メニュー10％OFF!★",
+        "conditions": "ご来店のさいにご提示ください。また、他のクーポンやサービスとの併用できません。",
+        "expiresAt": "2015-02-18T16:54:25.473Z",
+        "image": {
+            "id": "5541e298f27ae7da50d17816",
+            "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
+            "originalWidth": 800,
+            "originalHeight": 600,
             "createdAt": "2015-02-18T16:54:25.473Z",
             "updatedAt": "2015-02-18T16:54:25.473Z",
             "deletedAt": null
-        }
+        },
+        "applicationId": 14,
+        "commentsCount": 3,
+        "likesCount": 4,
+        "viewsCount": 18,
+        "createdAt": "2015-02-18T16:54:25.473Z",
+        "updatedAt": "2015-02-18T16:54:25.473Z",
+        "deletedAt": null
+    }
 
-* `voices`
+# Comments
 
-    Sample voice:
+Sample comment:
 
-        {
-            "id": "5541e298f27ae7da50d17816",
-            "body": "2月24日に、本マグロの解体ショーを行います！",
-            "images": [{
-                "id": "5541e298f27ae7da50d17816",
+    {
+        "id": "5541e298f27ae7da50d17816",
+        "body": "とてもいい意見だと思います。",
+        "applicationId": 14,
+        "author": {
+            "id": 8,
+            "displayName": "だにー",
+            "profileImage": {
+                "id": "5541e298f27ae7da50d17716",
                 "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
                 "originalWidth": 800,
                 "originalHeight": 600,
                 "createdAt": "2015-02-18T16:54:25.473Z",
                 "updatedAt": "2015-02-18T16:54:25.473Z",
                 "deletedAt": null
-            }],
-            "applicationId": 14,
-            "commentsCount": 3,
-            "likesCount": 4,
-            "viewsCount": 18,
-            "createdAt": "2015-02-18T16:54:25.473Z",
-            "updatedAt": "2015-02-18T16:54:25.473Z",
-            "deletedAt": null
-        }
-
-* `coupons`
-
-    Sample coupon:
-
-            {
-                "id": "5541e298f27ae7da50d17816",
-                "title": "★フードもドリンクも♪全メニュー10％OFF!★",
-                "conditions": "ご来店のさいにご提示ください。また、他のクーポンやサービスとの併用できません。",
-                "expiresAt": "2015-02-18T16:54:25.473Z",
-                "image": {
-                    "id": "5541e298f27ae7da50d17816",
-                    "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
-                    "originalWidth": 800,
-                    "originalHeight": 600,
-                    "createdAt": "2015-02-18T16:54:25.473Z",
-                    "updatedAt": "2015-02-18T16:54:25.473Z",
-                    "deletedAt": null
-                },
-                "applicationId": 14,
-                "commentsCount": 3,
-                "likesCount": 4,
-                "viewsCount": 18,
-                "createdAt": "2015-02-18T16:54:25.473Z",
-                "updatedAt": "2015-02-18T16:54:25.473Z",
-                "deletedAt": null
             }
+        },
+        "item": {
+            "itemId": "4541e298f27ae7da50d17716",
+            "type": "news"
+        },
+        "likesCount": 4,
+        "createdAt": "2015-02-18T16:54:25.473Z",
+        "updatedAt": "2015-02-18T16:54:25.473Z",
+        "deletedAt": null
+    }
 
-* `comments`
-
-    Sample comment:
-
-            {
-                "id": "5541e298f27ae7da50d17816",
-                "body": "とてもいい意見だと思います。",
-                "applicationId": 14,
-                "author": {
-                    "id": 8,
-                    "displayName": "だにー",
-                    "profileImage": {
-                        "id": "5541e298f27ae7da50d17816",
-                        "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
-                        "originalWidth": 800,
-                        "originalHeight": 600,
-                        "createdAt": "2015-02-18T16:54:25.473Z",
-                        "updatedAt": "2015-02-18T16:54:25.473Z",
-                        "deletedAt": null
-                    }
-                },
-                "likesCount": 4,
-                "createdAt": "2015-02-18T16:54:25.473Z",
-                "updatedAt": "2015-02-18T16:54:25.473Z",
-                "deletedAt": null
-            }
-
-## Plugin items [/p/{plugin}]
+## Plugin items collection [/p/{plugin}]
 
 + Parameters
     + plugin: news (enum[string], required) - The plugin to use
