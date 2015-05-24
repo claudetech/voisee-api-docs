@@ -357,6 +357,32 @@ Available plugins are:
                 "deletedAt": null
             }
 
+* `comments`
+
+    Sample comment:
+
+            {
+                "id": "5541e298f27ae7da50d17816",
+                "body": "とてもいい意見だと思います。",
+                "applicationId": 14,
+                "author": {
+                    "id": 8,
+                    "displayName": "だにー",
+                    "profileImage": {
+                        "id": "5541e298f27ae7da50d17816",
+                        "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
+                        "originalWidth": 800,
+                        "originalHeight": 600,
+                        "createdAt": "2015-02-18T16:54:25.473Z",
+                        "updatedAt": "2015-02-18T16:54:25.473Z",
+                        "deletedAt": null
+                    }
+                },
+                "likesCount": 4,
+                "createdAt": "2015-02-18T16:54:25.473Z",
+                "updatedAt": "2015-02-18T16:54:25.473Z",
+                "deletedAt": null
+            }
 
 ## Plugin items [/p/{plugin}]
 
@@ -366,6 +392,7 @@ Available plugins are:
             + news
             + voices
             + coupons
+            + comments
 
 ### List items [GET]
 
@@ -457,6 +484,7 @@ List plugin items.
             + news
             + voices
             + coupons
+            + comments
 
 ### Retrieve item [GET]
 
