@@ -273,13 +273,103 @@ Requires store permission. Creates or updates the store application.
 
     [Application][]
 
-# Group News
+# Group Plugins
 
-## News collection [/p/news]
 
-### List news [GET]
+Available plugins are:
 
-List all news.
+* `news`
+
+    Sample news:
+
+        {
+            "id": "5541e298f27ae7da50d17816",
+            "title": "2月24日に、本マグロの解体ショーを行います！",
+            "body": "本マグロの解体ショーの魅力は、何といってもそのスケールの大きさ。 解体する本マグロの重量は、ほとんどが200kgを超えるもの。\n時には、300kgを超える巨大本マグロを解体することもあります。 \n海の中で時速約90kmのスピードで止まることなく泳ぎ続ける本マグロは、15～18年でこの大きさに成長。本マグロは、このクラスが最も美味しいとされています。\n是非お越しください！",
+            "publishAt": "2015-02-18T16:54:25.473Z",
+            "images": [{
+                "id": "5541e298f27ae7da50d17816",
+                "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
+                "originalWidth": 800,
+                "originalHeight": 600,
+                "createdAt": "2015-02-18T16:54:25.473Z",
+                "updatedAt": "2015-02-18T16:54:25.473Z",
+                "deletedAt": null
+            }],
+            "applicationId": 14,
+            "commentsCount": 3,
+            "likesCount": 4,
+            "viewsCount": 18,
+            "createdAt": "2015-02-18T16:54:25.473Z",
+            "updatedAt": "2015-02-18T16:54:25.473Z",
+            "deletedAt": null
+        }
+
+* `voices`
+
+    Sample voice:
+
+        {
+            "id": "5541e298f27ae7da50d17816",
+            "body": "2月24日に、本マグロの解体ショーを行います！",
+            "images": [{
+                "id": "5541e298f27ae7da50d17816",
+                "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
+                "originalWidth": 800,
+                "originalHeight": 600,
+                "createdAt": "2015-02-18T16:54:25.473Z",
+                "updatedAt": "2015-02-18T16:54:25.473Z",
+                "deletedAt": null
+            }],
+            "applicationId": 14,
+            "commentsCount": 3,
+            "likesCount": 4,
+            "viewsCount": 18,
+            "createdAt": "2015-02-18T16:54:25.473Z",
+            "updatedAt": "2015-02-18T16:54:25.473Z",
+            "deletedAt": null
+        }
+
+* `coupons`
+
+    Sample coupon:
+
+            {
+                "id": "5541e298f27ae7da50d17816",
+                "title": "★フードもドリンクも♪全メニュー10％OFF!★",
+                "conditions": "ご来店のさいにご提示ください。また、他のクーポンやサービスとの併用できません。",
+                "expiresAt": "2015-02-18T16:54:25.473Z",
+                "image": {
+                    "id": "5541e298f27ae7da50d17816",
+                    "url": "https://images.voisee.jp/uploads/image/file/15/v1424451244/sic8lrgd62agvpogjc4g.png",
+                    "originalWidth": 800,
+                    "originalHeight": 600,
+                    "createdAt": "2015-02-18T16:54:25.473Z",
+                    "updatedAt": "2015-02-18T16:54:25.473Z",
+                    "deletedAt": null
+                },
+                "applicationId": 14,
+                "commentsCount": 3,
+                "likesCount": 4,
+                "viewsCount": 18,
+                "createdAt": "2015-02-18T16:54:25.473Z",
+                "updatedAt": "2015-02-18T16:54:25.473Z",
+                "deletedAt": null
+            }
+
+
+## Plugin items [/p/{plugin}]
+
++ Parameters
+    + plugin: news (enum[string], required) - The plugin to use
+        + Members
+            + news
+            + voices
+            + coupons
+
+### List items [GET]
+
+List plugin items.
 
 + Response 200 (application/json)
 
@@ -299,6 +389,7 @@ List all news.
                 "updatedAt": "2015-02-18T16:54:25.473Z",
                 "deletedAt": null
             }],
+            "applicationId": 14,
             "commentsCount": 3,
             "likesCount": 4,
             "viewsCount": 18,
@@ -309,7 +400,7 @@ List all news.
         }]
         ```
 
-### Post news [POST]
+### Post item [POST]
 
 + Request
 
@@ -323,7 +414,8 @@ List all news.
                 "images": [
                     "5541e298f27ae7da50d17816",
                     "5541e298f27ae7da50d18817"
-                ]
+                ],
+                "applicationId": 14
             }
         ```
 
@@ -345,6 +437,7 @@ List all news.
                 "updatedAt": "2015-02-18T16:54:25.473Z",
                 "deletedAt": null
             }],
+            "applicationId": 14,
             "commentsCount": 0,
             "likesCount": 0,
             "viewsCount": 0,
@@ -355,9 +448,17 @@ List all news.
         }
         ```
 
-## News resource [/v1/news/{id}]
+## Plugin item resource [/v1/{plugin}/{id}]
 
-### Retrieve news [GET]
++ Parameters
+    + id: 5541e298f27ae7da50d17816 (int, required) - The id of the item
+    + plugin: news (enum[string], required) - The plugin to use
+        + Members
+            + news
+            + voices
+            + coupons
+
+### Retrieve item [GET]
 
 + Response 200 (application/json)
 
@@ -377,6 +478,7 @@ List all news.
                 "updatedAt": "2015-02-18T16:54:25.473Z",
                 "deletedAt": null
             }],
+            "applicationId": 14,
             "commentsCount": 3,
             "likesCount": 4,
             "viewsCount": 18,
@@ -387,7 +489,7 @@ List all news.
         }
         ```
 
-### Update news [PUT]
+### Update item [PUT]
 
 + Request
 
@@ -400,7 +502,8 @@ List all news.
                 "images": [
                     "5541e298f27ae7da50d17816",
                     "5541e298f27ae7da50d18817"
-                ]
+                ],
+                "applicationId": 14
             }
         ```
 
@@ -422,6 +525,7 @@ List all news.
                 "updatedAt": "2015-02-18T16:54:25.473Z",
                 "deletedAt": null
             }],
+            "applicationId": 14,
             "commentsCount": 0,
             "likesCount": 0,
             "viewsCount": 0,
@@ -432,7 +536,7 @@ List all news.
         }
         ```
 
-### Update news [DELETE]
+### Update item [DELETE]
 
 + Response 200 (application/json)
 
@@ -452,6 +556,7 @@ List all news.
                 "updatedAt": "2015-02-18T16:54:25.473Z",
                 "deletedAt": null
             }],
+            "applicationId": 14,
             "commentsCount": 0,
             "likesCount": 0,
             "viewsCount": 0,
